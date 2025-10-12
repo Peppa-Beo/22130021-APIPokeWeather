@@ -191,11 +191,9 @@ li {
     /* Quan trọng: Phân chia không gian cho box */
     /* flex-grow: 1, flex-shrink: 1, flex-basis: 48% (Chiếm gần 50% để trừ gap 20px) */
     flex: 1 1 calc(50% - 10px);
-    padding: 10px;
-    margin: 0px 10px 10px 10px;
+    padding: 5px;
     border: 4px solid #ddd;
     border-radius: 10px;
-    /* Giữ lại các thuộc tính định dạng khác */
 }
 
 .project-card h3 {

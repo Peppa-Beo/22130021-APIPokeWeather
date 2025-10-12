@@ -7,6 +7,8 @@ const weatherDataContainer = document.getElementById('weather-data'); // Vị tr
 const weatherIconElement = document.getElementById('weather-icon');
 const weatherDetailsElement = document.getElementById('weather-details');
 const pokemonName = document.getElementById('pokemon-name');
+const exchangeRateDataElement = document.getElementById('exchange-rate-data');
+const refreshExchangeButton = document.getElementById('refresh-exchange-btn');
 
 document.addEventListener('DOMContentLoaded', () => {
     const pokemonInput = document.getElementById('pokemon-name');
@@ -148,20 +150,55 @@ function getLocationAndFetchWeather() {
     }
 }
 
+// =================================================================
+// 4. XỬ LÝ EXCHANGE RATE API (USD/VND)
+// =================================================================
+
+async function fetchExchangeRate() {
+    exchangeRateDataElement.innerHTML = `<p>🔄 Đang tải tỷ giá...</p>`;
+    const url = 'https://api.exchangerate.host/latest?base=USD&symbols=VND';
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Lỗi HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+
+        // Trích xuất tỷ giá VND
+        const vndRate = data.rates.VND;
+
+        if (vndRate) {
+            exchangeRateDataElement.innerHTML = `
+                <p style="font-size: 1.2em; text-align: center;">
+                    <strong>1 USD</strong> tương đương <strong>${vndRate.toFixed(0)} VND</strong>
+                </p>
+                <p style="font-size: 0.8em; text-align: center; color: #ccc;">
+                    (Cập nhật: ${new Date(data.date).toLocaleDateString()})
+                </p>
+            `;
+        } else {
+            throw new Error("Không tìm thấy tỷ giá VND.");
+        }
+
+    } catch (error) {
+        exchangeRateDataElement.innerHTML = `<p>Không có dữ liệu!</p>`;
+    }
+}
 
 // =================================================================
-// 4. CHẠY KHI TRANG TẢI XONG
+// 5. CHẠY KHI TRANG TẢI XONG
 // =================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchPokemon();
     getLocationAndFetchWeather();
+    fetchExchangeRate();
 });
 
 // TRONG FILE script.js HOẶC code.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ... (Giữ nguyên các hàm cho Project Pikachu và Thời tiết đã có)
 
     const globalRefreshButton = document.getElementById('global-refresh-btn');
 
@@ -171,6 +208,4 @@ document.addEventListener('DOMContentLoaded', () => {
             location.reload();
         });
     }
-
-    // ... (Các lệnh khác như fetchPokemon() và getLocationAndFetchWeather() đã có)
 });
