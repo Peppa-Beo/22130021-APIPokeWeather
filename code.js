@@ -120,7 +120,7 @@ function displayWeather(currentWeather, lat, lon) {
     weatherIconElement.innerHTML = icon;
 
     weatherDetailsElement.innerHTML = `
-        <p><strong>Vị trí:</strong> Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}</p>
+        <p><strong>Vị trí:</strong> Vĩ độ: ${lat.toFixed(2)} / Kinh độ: ${lon.toFixed(2)}</p>
         <p><strong>Tình trạng:</strong> ${description}</p>
         <p><strong>Nhiệt độ:</strong> ${temperature} °C</p>
         <p><strong>Tốc độ gió:</strong> ${windspeed} km/h</p>
