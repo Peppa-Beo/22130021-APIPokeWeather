@@ -156,7 +156,7 @@ function getLocationAndFetchWeather() {
 
 async function fetchExchangeRate() {
     exchangeRateDataElement.innerHTML = `<p>🔄 Đang tải tỷ giá...</p>`;
-    const url = 'https://api.exchangerate.host/latest?base=USD&symbols=VND';
+    const url = 'https://v6.exchangerate-api.com/v6/50cae54a97545dfca07872f9/latest/USD';
 
     try {
         const response = await fetch(url);
@@ -166,15 +166,15 @@ async function fetchExchangeRate() {
         const data = await response.json();
 
         // Trích xuất tỷ giá VND
-        const vndRate = data.rates.VND;
+        const vndRate = data.conversion_rates.VND;
 
         if (vndRate) {
             exchangeRateDataElement.innerHTML = `
                 <p style="font-size: 1.2em; text-align: center;">
-                    <strong>1 USD</strong> tương đương <strong>${vndRate.toFixed(0)} VND</strong>
+                    <strong>1 USD</strong> = <strong>${vndRate.toFixed(0)} VND</strong>
                 </p>
                 <p style="font-size: 0.8em; text-align: center; color: #ccc;">
-                    (Cập nhật: ${new Date(data.date).toLocaleDateString()})
+                    (Cập nhật: ${new Date(data.time_last_update_utc).toLocaleDateString()})
                 </p>
             `;
         } else {
