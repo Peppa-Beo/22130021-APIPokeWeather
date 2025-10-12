@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: rgb(50, 50, 50);
+}
+
+.container {
+    width: 900px;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.image img {
+    border: 2px solid white;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+.left {
+    background: rgb(126, 126, 126);
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right {
+    background: white;
+    width: 540px;
+}
+
+.hr1 {
+    border: 1.5px solid white;
+    margin: 0px 50px;
+}
+
+.hr2 {
+    border: 1.5px solid black;
+    margin: 0px 30px;
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+h2 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0px 5px 0px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    text-decoration: underline;
+}
+
+.data-left {
+    padding: 0px 50px;
+    margin: 0px 0px 20px 0px;
+}
+
+.data-left h1 {
+    color: white;
+}
+
+.data-right {
+    padding: 0px 30px;
+    margin: 0px 0px 20px 0px;
+}
+
+a {
+    color: white;
+}
+
+.info {
+    display: flex;
+}
+
+.info-icon {
+    width: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.info-icon-star {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 5px;
+}
+
+.info-content {
+    display: flex;
+    flex-grow: 1;
+    padding: 5px 10px;
+    color: white;
+    font-size: 18px;
+}
+
+.info-black {
+    color: rgb(81, 81, 81);
+    font-size: 18px;
+    margin: 5px 0px;
+}
+
+.info-work {
+    display: flex;
+    flex-grow: 1;
+    color: rgb(81, 81, 81);
+    font-size: 18px;
+    margin: 5px 0px;
+    gap: 250px;
+}
+
+.info-blacklist {
+    color: rgb(81, 81, 81);
+}
+
+ul {
+    color: white;
+    padding-left: 15px;
+    font-size: 18px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.name {
+    color: rgb(126, 126, 126);
+    font-size: 40px;
+    font-weight: bold;
+    padding: 30px 30px 10px 30px;
+}
+
+.hr-name {
+    border: 4px solid rgb(126, 126, 126);
+    margin: 0px 30px 50px 30px;
+}
+
+/* Thêm CSS cơ bản cho mục Projects */
+.cv-section-content {
+    width: 900px;
+    margin: 0 auto;
+    padding: 0;
+    background: rgb(126, 126, 126);
+    color: white;
+}
+
+#projects {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    /* Cho phép xuống hàng nếu không đủ chỗ */
+    gap: 20px;
+    color: white;
+    /* Khoảng cách giữa các Project Card */
+}
+
+/* ------------------------------------------------------------------- */
+/* ĐỊNH KÍCH THƯỚC CHO MỖI BOX PROJECT */
+/* ------------------------------------------------------------------- */
+.project-card {
+    /* Quan trọng: Phân chia không gian cho box */
+    /* flex-grow: 1, flex-shrink: 1, flex-basis: 48% (Chiếm gần 50% để trừ gap 20px) */
+    flex: 1 1 calc(50% - 10px);
+    padding: 10px;
+    margin: 0px 10px 10px 10px;
+    border: 4px solid #ddd;
+    border-radius: 10px;
+    /* Giữ lại các thuộc tính định dạng khác */
+}
+
+.project-card h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 22px;
+    text-decoration: underline;
+}
+
+.project-card ul {
+    font-size: 16px;
+}
+
+#weather-icon {
+    font-size: 3em;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.poke-name {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+button {
+    font-size: 16px;
+    background: rgb(50, 50, 50);
+    border: 2px solid white;
+    color: white;
+    padding: 2px;
+}
