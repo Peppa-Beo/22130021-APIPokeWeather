@@ -237,8 +237,8 @@
             <div class="project-card">
                 <h3>Pokemon Info</h3>
                 <div class="poke-name">
-                    <span>Tên/ID:</span>
-                    <span><input class="box" id="pokemon-name"></span>
+                    <span><input class="box" placeholder="Nhập tên/ID Pokemon" id="pokemon-name"
+                            style="padding: 3px"></span>
                 </div>
                 <div id="pokemon-data">Đang tải dữ liệu...</div>
             </div>
@@ -256,6 +256,14 @@
                 <h3>Tỷ Giá USD/VND</h3>
                 <div id="exchange-rate-data">
                     <p>Đang tải dữ liệu...</p>
+                </div>
+                <hr style="border: 2px solid white; margin: 10px 0">
+                <h3>Chuyển đổi USD → VND</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <input type="number" id="usd-input" placeholder="Nhập số tiền USD"
+                        style="width: 49%; padding: 3px;">
+                    <span style="font-size: 1.2em;">$</span>
+                    <div id="vnd-result" style="width: 45%; text-align: right; font-weight: bold;">0 ₫</div>
                 </div>
             </div>
         </div>

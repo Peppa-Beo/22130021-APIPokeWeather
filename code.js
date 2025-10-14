@@ -9,6 +9,9 @@ const weatherDetailsElement = document.getElementById('weather-details');
 const pokemonName = document.getElementById('pokemon-name');
 const exchangeRateDataElement = document.getElementById('exchange-rate-data');
 const refreshExchangeButton = document.getElementById('refresh-exchange-btn');
+const usdInput = document.getElementById('usd-input');
+const vndResultElement = document.getElementById('vnd-result');
+let currentVNDRate = 0;
 
 document.addEventListener('DOMContentLoaded', () => {
     const pokemonInput = document.getElementById('pokemon-name');
@@ -40,7 +43,7 @@ async function fetchPokemon(pokemonName) {
 function displayPokemon(data) {
     const html = `
         <div style="display: flex; align-items: center;">
-            <img src="${data.sprites.front_default}" alt="${data.name}" style="width: 80px; margin-right: 15px;">
+            <img src="${data.sprites.other.showdown.front_default}" alt="${data.name}" style="width: 80px; margin-right: 15px;">
             <div>
                 <p><strong>Tên:</strong> ${data.name.toUpperCase()}</p>
                 <p><strong>ID:</strong> #${data.id}</p>
@@ -169,14 +172,16 @@ async function fetchExchangeRate() {
         const vndRate = data.conversion_rates.VND;
 
         if (vndRate) {
+            currentVNDRate = vndRate;
             exchangeRateDataElement.innerHTML = `
                 <p style="font-size: 1.2em; text-align: center;">
-                    <strong>1 USD</strong> = <strong>${vndRate.toFixed(0)} VND</strong>
+                    <strong>1$</strong> = <strong>${vndRate.toFixed(0)}₫</strong>
                 </p>
                 <p style="font-size: 0.8em; text-align: center; color: #ccc;">
                     (Cập nhật: ${new Date(data.time_last_update_utc).toLocaleDateString()})
                 </p>
             `;
+            convertUSDtoVND();
         } else {
             throw new Error("Không tìm thấy tỷ giá VND.");
         }
@@ -186,6 +191,29 @@ async function fetchExchangeRate() {
     }
 }
 
+function convertUSDtoVND() {
+    if (currentVNDRate === 0) {
+        vndResultElement.innerHTML = "Chưa có tỷ giá";
+        return;
+    }
+
+    // Lấy giá trị nhập vào, chuyển sang số
+    const usdAmount = parseFloat(usdInput.value);
+
+    // Kiểm tra đầu vào hợp lệ
+    if (isNaN(usdAmount) || usdAmount < 0) {
+        vndResultElement.innerHTML = "0 ₫";
+        return;
+    }
+
+    // Tính toán
+    const vndAmount = usdAmount * currentVNDRate;
+
+    // Định dạng số tiền (thêm dấu phẩy phân cách hàng nghìn)
+    const formattedVND = vndAmount.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+
+    vndResultElement.innerHTML = formattedVND;
+}
 // =================================================================
 // 5. CHẠY KHI TRANG TẢI XONG
 // =================================================================
@@ -207,5 +235,19 @@ document.addEventListener('DOMContentLoaded', () => {
             // Lệnh quan trọng: Tải lại trang web
             location.reload();
         });
+    }
+    // 1. Kích hoạt Tỷ giá khi tải trang
+    fetchExchangeRate();
+
+    // 2. Gắn sự kiện cho nút Tỷ giá
+    if (refreshExchangeButton) {
+        // Sau khi refresh xong, nó sẽ tự động gọi convertUSDtoVND()
+        refreshExchangeButton.addEventListener('click', fetchExchangeRate);
+    }
+
+    // !!! GẮN SỰ KIỆN CHO Ô NHẬP USD !!!
+    if (usdInput) {
+        // Sử dụng 'input' để tính toán ngay lập tức khi người dùng gõ
+        usdInput.addEventListener('input', convertUSDtoVND);
     }
 });
