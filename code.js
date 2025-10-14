@@ -206,6 +206,12 @@ function convertUSDtoVND() {
         return;
     }
 
+    // THÊM: Giới hạn số tiền tối đa (ví dụ: 10,000,000 USD)
+    const MAX_USD = 1000000;
+    if (usdAmount > MAX_USD) {
+        usdAmount = MAX_USD;
+    }
+
     // Tính toán
     const vndAmount = usdAmount * currentVNDRate;
 
